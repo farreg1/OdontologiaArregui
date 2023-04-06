@@ -1,6 +1,8 @@
 package com.example.proyectoFinal_v2.controller;
 
 import com.example.proyectoFinal_v2.domain.Odontologo;
+import com.example.proyectoFinal_v2.domain.Paciente;
+import com.example.proyectoFinal_v2.exceptions.ResourceNotFoundException;
 import com.example.proyectoFinal_v2.service.OdontologoService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +37,14 @@ private OdontologoService odontologoService;
     public ResponseEntity<Odontologo> agregarOdontologo(@RequestBody Odontologo odontologo){
     return ResponseEntity.ok(odontologoService.altaOdontologo(odontologo));
 }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String>  eliminarOdontologoXId(@PathVariable Long id) throws ResourceNotFoundException {
+        odontologoService.eliminarOdontologo(id);
+        return ResponseEntity.ok("Se ha eliminado el paciente con ID " + id + " correctamente");
+    }
+    @PutMapping
+    public Odontologo actualizarOdontologo(@RequestBody Odontologo odontologo){
+        return odontologoService.actualizarOdontologo(odontologo);
+    }
+
 }

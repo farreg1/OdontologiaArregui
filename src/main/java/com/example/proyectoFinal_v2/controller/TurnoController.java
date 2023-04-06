@@ -47,7 +47,7 @@ public class TurnoController {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarTurno(@PathVariable Long id){
         Optional<TurnoDTO> turnoBuscado =  turnoService.buscarTurno(id);
         if (turnoBuscado.isPresent()){

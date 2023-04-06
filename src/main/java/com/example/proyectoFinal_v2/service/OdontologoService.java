@@ -1,6 +1,8 @@
 package com.example.proyectoFinal_v2.service;
 
 import com.example.proyectoFinal_v2.domain.Odontologo;
+import com.example.proyectoFinal_v2.domain.Paciente;
+import com.example.proyectoFinal_v2.exceptions.ResourceNotFoundException;
 import com.example.proyectoFinal_v2.repository.OdontologoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,16 @@ public class OdontologoService {
     public Odontologo altaOdontologo(Odontologo odontologo){
         return odontologoRepository.save(odontologo);
     }
-    public void borrarOdontologo(Long id){
-        odontologoRepository.deleteById(id);
+    public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
+        Optional<Odontologo> odontologoBuscado = odontologoRepository.findById(id);
+        if (odontologoBuscado.isPresent()) {
+            odontologoRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("Error. No existe el paciente con id= " + id);
+        }
+    }
+    public Odontologo actualizarOdontologo(Odontologo odontologo){
+        return odontologoRepository.save(odontologo);
+
     }
 }
